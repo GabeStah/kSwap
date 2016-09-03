@@ -23,10 +23,7 @@ local defaults = {
 		minimap = {
 			hide = false,
 		},
-		filter = {
-			realm = {},
-			char = {},
-		},
+		swapEquipment = true
 	},
 	global = {},
 }
@@ -54,6 +51,16 @@ local function GetOptions(uiType, uiName)
 					else
 						icon:Show("kSwap")
 					end
+				end,
+			},
+      swapEquipment = {
+				name = "Swap Equiment Set",
+				desc = "Determines if, in addition to swapping Specialization, Equipment Set should also be swapped.",
+				type = "toggle",
+				order = 10,
+				get = function() return self.db.profile.swapEquipment end,
+				set = function()
+					self.db.profile.swapEquipment = not self.db.profile.swapEquipment
 				end,
 			},
 		},
@@ -144,12 +151,12 @@ function kSwap:ActivateSpecialization(spec)
   if not self:IsSpecializationActive(spec) then
     SetSpecialization(specIndex)
     -- If not equipped, schedule timer to equip set.
-    if not self:IsEquipmentActive(spec) then
+    if self.db.profile.swapEquipment and not self:IsEquipmentActive(spec) then
       self:ScheduleTimer("EquipSet", 5.5, spec)
     end
   else
     -- If already specialized and equipment not active, equip immediately.
-    if not self:IsEquipmentActive(spec) then
+    if self.db.profile.swapEquipment and not self:IsEquipmentActive(spec) then
       UseEquipmentSet(spec)
     end  
   end
@@ -186,7 +193,9 @@ function kSwap:IsEquipmentActive(val)
 end
 
 function kSwap:UpdateData()
-  self:UpdateEquipmentData()
+  if self.db.profile.swapEquipment then
+    self:UpdateEquipmentData()
+  end
   self:UpdateSpecializationData()
   dataobj.text, dataobj.icon = self:GetSpecializationNameIcon()
 end
@@ -243,6 +252,7 @@ function kSwap:UpdateSpecializationData()
 end
 
 function kSwap:VerifySetEquipped(set)
+  if not self.db.profile.swapEquipment then return end
   self.verifySetEquippedCounter = self.verifySetEquippedCounter + 1
   if self.verifySetEquippedCounter >= 6 or self:IsEquipmentActive(set) then
     self:CancelTimer("VerifySetEquipped")
@@ -281,7 +291,7 @@ function dataobj:OnEnter()
 
   tooltip = LQT:Acquire("kSwapTip",
     -- Columns
-    4,
+    kSwap.db.profile.swapEquipment and 4 or 3,
     -- Alignments
     "CENTER", "CENTER", "LEFT", "LEFT"
   )
@@ -300,28 +310,46 @@ function dataobj:OnEnter()
 	tooltip:SetFont(myFont)
 
   local line = tooltip:AddLine()
-  tooltip:SetCell(line, 1, "kSwap", nil, "LEFT", 4)
+  tooltip:SetCell(line, 1, "kSwap", nil, "LEFT", kSwap.db.profile.swapEquipment and 4 or 3)
   tooltip:AddSeparator()
   
   for i,data in pairs(kSwap.SPECIALIZATION_DATA) do
     local line = tooltip:AddLine()
-    tooltip:SetCell(line, 1, data.active and path.."check.tga" or nil, myProvider)
-    tooltip:SetCell(line, 2, kSwap:IsEquipmentActive(data.name) and path.."shield-blue.tga" or nil, myProvider)    
-    tooltip:SetCell(line, 3, data.icon, myProvider)
-    tooltip:SetCell(line, 4, data.name)
+    for column = 1, kSwap.db.profile.swapEquipment and 4 or 3 do
+      addTooltipCells(tooltip, data, line, column)
+    end
     tooltip:SetLineScript(line, "OnMouseUp", MouseHandler, function() kSwap:ActivateSpecialization(data.name) end)
   end
 
+  tooltip:AddLine(" ")
+  local line = tooltip:AddLine()
+  tooltip:SetCell(line, 1, "|cffeda55fRight-Click|r for options.", nil, "LEFT", kSwap.db.profile.swapEquipment and 4 or 3)
+  --tooltip:AddLine("|cffeda55fRight-Click|r for options.", 0.2, 1, 0.2)
+  
   tooltip:SetAutoHideDelay(0.01, self)
 	tooltip:SmartAnchorTo(self)
 	tooltip:Show()
 end
 
--- Handled by the AutoHide
---function dataobj:OnLeave()
---	LQT:Release(tooltip)
---	tooltip = nil
---end
+function addTooltipCells(tooltip, data, line, column)
+  if column == 1 then
+    tooltip:SetCell(line, column, data.active and path.."check.tga" or nil, myProvider)
+  elseif column == 2 then
+    if kSwap.db.profile.swapEquipment then
+      tooltip:SetCell(line, column, kSwap:IsEquipmentActive(data.name) and path.."shield-blue.tga" or nil, myProvider)    
+    else
+      tooltip:SetCell(line, column, data.icon, myProvider)
+    end
+  elseif column == 3 then
+    if kSwap.db.profile.swapEquipment then
+      tooltip:SetCell(line, column, data.icon, myProvider)
+    else
+      tooltip:SetCell(line, column, data.name)
+    end  
+  elseif column == 4 then
+    tooltip:SetCell(line, column, data.name)
+  end
+end
 
 function dataobj:OnClick(button)
   if button == "RightButton" then
