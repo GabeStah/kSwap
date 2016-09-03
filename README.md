@@ -9,11 +9,11 @@ Broker-based World of Warcraft addon that allows the user to easily swap between
 
 ## Download
 
-Go to the [Latest Release](https://github.com/GabeStah/kSwap/releases/latest) page and click the `kSwap-#-#-#.zip` archive to download.
+Go to the [Latest Release](https://github.com/GabeStah/kSwap/releases/latest) page and click the `kSwap-#.#.#.zip` archive to download.
 
 ## Installation
 
-Unzip the `kSwap-#-#-#.zip` archive and extract the `kSwap` directory in `<World of Warcraft Directory>\Interface\AddOns\`, such that the final installation path is: `<World of Warcraft Directory>\Interface\AddOns\kSwap`.
+Unzip the `kSwap-#.#.#.zip` archive and extract the `kSwap` directory in `<World of Warcraft Directory>\Interface\AddOns\`, such that the final installation path is: `<World of Warcraft Directory>\Interface\AddOns\kSwap`.
 
 If a broker addon is installed, `kSwap` should appear automatically with the icon and name matching your current specialization.
 
