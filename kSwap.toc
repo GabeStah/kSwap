@@ -1,9 +1,9 @@
 ## Title: kSwap
-## Version: 15
+## Version: 1.0.1
 ## Author: Kulldam
 ## Notes: Broker display to change specialization (and equivalently named equipment set).
 ## Interface: 70300
-## SavedVariables: Broker_kSpecGearSwapDB
+## SavedVariables: kSpecGearSwapDB
 ## OptionalDeps: Ace3, LibAbacus-3.0, LibCrayon-3.0, LibDBIcon-1.0, LibQTip-1.0
 ## X-Category: Interface Enhancements
 ## X-Embeds: Ace3, LibAbacus-3.0, LibCrayon-3.0, LibDBIcon-1.0, LibQTip-1.0

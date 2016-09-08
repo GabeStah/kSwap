@@ -166,8 +166,7 @@ function kSwap:EquipSet(set)
   -- Equip set.
   UseEquipmentSet(set)
   self.verifySetEquippedCounter = 0
-  -- Add verification of equip success.
-  self:ScheduleRepeatingTimer("VerifySetEquipped", 5, set)
+  self:ScheduleTimer("VerifySetEquipped", 1, set, true)
 end
 
 function kSwap:GetSpecializationNameIcon()
@@ -251,14 +250,20 @@ function kSwap:UpdateSpecializationData()
   end
 end
 
-function kSwap:VerifySetEquipped(set)
+function kSwap:VerifySetEquipped(set, repeated)
   if not self.db.profile.swapEquipment then return end
   self.verifySetEquippedCounter = self.verifySetEquippedCounter + 1
   if self.verifySetEquippedCounter >= 6 or self:IsEquipmentActive(set) then
-    self:CancelTimer("VerifySetEquipped")
+    if self.timerVerifySetEquipped then
+      self:CancelTimer(self.timerVerifySetEquipped)
+    end
   else
     -- Try to equip set.
     UseEquipmentSet(set)
+    if repeated then
+      -- Add verification of equip success.
+      self.timerVerifySetEquipped = self:ScheduleRepeatingTimer("VerifySetEquipped", 5, set)
+    end
   end
 end
 
