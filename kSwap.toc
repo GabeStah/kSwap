@@ -1,5 +1,5 @@
 ## Title: kSwap
-## Version: 1.2.2
+## Version: 1.2.3
 ## Author: Kulldam
 ## Notes: Broker display to change specialization (and equivalently named equipment set).
 ## Interface: 70300
