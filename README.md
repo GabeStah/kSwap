@@ -7,10 +7,6 @@ Broker-based World of Warcraft addon that allows the user to easily swap between
 - One-click specialization swap via broker popout.
 - (Optional) Simultaneous equipment set swap immediately after specialization swap.
 
-## Download
-
-Go to the [Latest Release](https://github.com/GabeStah/kSwap/releases/latest) page and click the `kSwap-#.#.#.zip` archive to download.
-
 ## Installation
 
 Unzip the `kSwap-#.#.#.zip` archive and extract the `kSwap` directory in `<World of Warcraft Directory>\Interface\AddOns\`, such that the final installation path is: `<World of Warcraft Directory>\Interface\AddOns\kSwap`.
