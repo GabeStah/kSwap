@@ -1,0 +1,39 @@
+externals:
+    libs/Ace3/AceAddon-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceAddon-3.0
+        tag: latest
+    libs/Ace3/AceConfig-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfig-3.0
+        tag: latest
+    libs/Ace3/AceConsole-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConsole-3.0
+        tag: latest
+    libs/Ace3/AceConfigDialog-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfigDialog-3.0
+        tag: latest
+    libs/Ace3/AceConfigRegistry-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfigRegistry-3.0
+        tag: latest
+    libs/Ace3/AceDB-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDB-3.0
+        tag: latest
+    libs/Ace3/AceEvent-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
+        tag: latest
+    libs/Ace3/AceTimer-3.0:
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTimer-3.0
+        tag: latest
+    libs/LibDBIcon-1.0:
+        url: svn://svn.wowace.com/wow/libdbicon-1-0/mainline/trunk
+        tag: latest
+    libs/LibDataBroker:
+        url: https://github.com/tekkub/libdatabroker-1-1.git
+        tag: latest
+    libs/LibQTip-1.0:
+        url: svn://svn.wowace.com/wow/libqtip-1-0/mainline/trunk
+        tag: latest
+    libs/LibStub:
+        url: svn://svn.wowace.com/wow/libstub/mainline/trunk
+        tag: latest
+
+package-as: kSwap

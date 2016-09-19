@@ -1,23 +1,10 @@
 ## Title: kSwap
-## Version: 1.0.1
+## Version: 1.2.2
 ## Author: Kulldam
 ## Notes: Broker display to change specialization (and equivalently named equipment set).
 ## Interface: 70300
-## SavedVariables: kSpecGearSwapDB
-## OptionalDeps: Ace3, LibAbacus-3.0, LibCrayon-3.0, LibDBIcon-1.0, LibQTip-1.0
-## X-Category: Interface Enhancements
-## X-Embeds: Ace3, LibAbacus-3.0, LibCrayon-3.0, LibDBIcon-1.0, LibQTip-1.0
-## X-Curse-Packaged-Version: 1
-## X-Curse-Project-Name: kSwap
-## X-Curse-Project-ID: kswap
-## X-Curse-Repository-ID: wow/kswap/mainline
-## X-Curse-Packaged-Version: r20150608011849
-## X-Curse-Project-Name: kswap
-## X-Curse-Project-ID: kswap
-## X-Curse-Repository-ID: wow/kswap/mainline
+## SavedVariables: kSwapDB
 
-#@no-lib-strip@
 embeds.xml
-#@end-no-lib-strip@
 
-kSwap.lua
+core.lua
